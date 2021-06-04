@@ -183,7 +183,7 @@ function selectionInterval(input) {
     counterTime += 1;
     maxLimitCounter += 1;
 
-    if (maxLimitCounter == 9) {
+    if (maxLimitCounter == 6) {
         clearInterval(interval);
 
         maxLimitCounter = 0;
