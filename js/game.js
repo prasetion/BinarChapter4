@@ -8,19 +8,23 @@ const LOSE = "lose";
 const DRAW = "draw";
 
 // result div
-let modalResult = document.getElementById("modalResult");
-let textResult = document.getElementById("textResult");
+const modalResult = document.getElementById("modalResult");
+const textResult = document.getElementById("textResult");
 
 // button rock paper scissors player
-let rockButton = document.getElementById("rockButton");
-let paperButton = document.getElementById("paperButton");
-let scissorButton = document.getElementById("scissorButton");
+const rockButton = document.getElementById("rockButton");
+const paperButton = document.getElementById("paperButton");
+const scissorButton = document.getElementById("scissorButton");
 
 // button rock paper scissors player
-let buttonCom = document.querySelectorAll(".buttonCom");
+const buttonCom = document.querySelectorAll(".buttonCom");
+const allButtonPlayer = document.querySelectorAll(".btn-player");
 
 // reset button
-let resetButton = document.getElementById("resetButton");
+const resetButton = document.getElementById("resetButton");
+
+const winPopUp = document.getElementById("pop-up-win")
+const versus = document.getElementById("versus")
 
 // rock paper scissor
 class RockPaperScissors {
@@ -141,7 +145,9 @@ function randomResult(input) {
 
 // win status
 function winStatus(input) {
-    modalResult.style.display = "block";
+    winPopUp.style.display = "block";
+    versus.innerHTML = "";
+    resetButton.classList.remove("btn-click-deactivate");
 
     if (input == WIN) {
         textResult.innerHTML = "Player Win";
@@ -172,11 +178,33 @@ scissorButton.onclick = function() {
     // winStatus(result);
 };
 
+resetButton.onclick = function() {
+    resetButton.classList.add("btn-click-deactivate");
+
+    // enable btn player
+    for (let index = 0; index < allButtonPlayer.length; index++) {
+        allButtonPlayer[index].classList.remove("btn-click-deactivate");
+    }
+
+    // disable active
+    for (let index = 0; index < allButtonPlayer.length; index++) {
+        buttonCom[index].classList.remove("active");
+    }
+    versus.innerHTML = "VS";
+    winPopUp.style.display = "none";
+}
+
 var counterTime = -1;
 var maxLimitCounter = 0;
 
 // interval selection
 function selectionInterval(input) {
+
+    // disable btn player
+    for (let index = 0; index < allButtonPlayer.length; index++) {
+        allButtonPlayer[index].classList.add("btn-click-deactivate");
+    }
+
     if (counterTime >= 3)
         counterTime = -1;
 
